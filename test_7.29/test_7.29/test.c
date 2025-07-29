@@ -2,17 +2,17 @@
 #include "game.h"
 void menu()
 {
-	printf("-------------------\n");
+	printf("--------------------\n");
 	printf("----1.  play  ----\n");
-	printf("----0.  exit  -----\n");
-	printf("-------------------\n");
+	printf("----0.  exit  ----\n");
+	printf("--------------------\n");
 }
 void game()
 {
 	char mine[ROWS][COLS] = { 0 };//存放雷的信息
 	char show[ROWS][COLS] = { 0 };//存放排查雷的信息
 	//初始化棋盘
-	initboard(mine, ROWS, COLS, '0');
+	initboard(mine, ROWS, COLS,'0');
 	initboard(show, ROWS, COLS,'*');
 	//打印棋盘
 	displayboard(show, ROW, COL);
@@ -21,34 +21,54 @@ void game()
 	setmine(mine, ROW, COL);
 	//displayboard(mine, ROW, COL);
 	//排查雷
-	findmine(mine,show, ROW, COL);
+	findmine(mine,show ,ROW, COL);
 }
-void test()
+
+int main()
 {
 	int input = 0;
-	srand((unsigned)(time)NULL);
+	srand((unsigned)time(NULL));
 	do
 	{
 		menu();
-		printf("请输入数字");
+		printf("请输入数字\n");
 		scanf("%d", &input);
 		switch (input)
 		{
 		case 1:
-			printf("扫雷游戏开始\n");
+			printf("游戏开始\n");
 			game();
 			break;
 		case 0:
-			printf("游戏结束");
+			printf("游戏结束\n");
 			break;
 		default:
-			printf("输入错误，请重新输入");
+			printf("输入错误，请重新输入\n");
 			break;
 		}
 	} while (input);
-}
-int main()
-{
-	test();
 	return 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -12,7 +12,6 @@ void initboard(char board[ROWS][COLS], int rows, int cols, char set)
 }
 void displayboard(char board[ROWS][COLS], int row, int col)
 {
-	printf("-----扫雷开始-----\n");
 	for (int j = 0; j <= col; j++)
 	{
 		printf("%d ", j);
@@ -30,21 +29,21 @@ void displayboard(char board[ROWS][COLS], int row, int col)
 }
 void setmine(char mine[ROWS][COLS], int row, int col)
 {
-	int count = EAST_COUNT;
+	int count = EASY_COUNT;
 	int x = 0;
 	int y = 0;
 	while (count)
 	{
-		x = rand() % row + 1;
-		y = rand() % col + 1;
+		x = rand() % row + 1;//行的范围为1~9
+		y = rand() % col + 1;//列的范围为1~9
 		if (mine[x][y] != '1')
 		{
-			mine[x][y] = '1';//布置雷
+			mine[x][y] = '1';//设置雷
 			count--;
 		}
 	}
 }
-int getmine_count(char mine[ROWS][COLS], int x,int y)
+int getmine(char mine[ROWS][COLS],int x,int y)
 {
 	int count = 0;
 	for (int i = -1; i <= 1; i++)
@@ -56,27 +55,27 @@ int getmine_count(char mine[ROWS][COLS], int x,int y)
 	}
 	return count;
 }
-void findmine(char mine[ROWS][COLS],char show[ROWS][COLS], int row, int col)
+void findmine(char mine[ROWS][COLS], char show[ROWS][COLS], int row, int col)
 {
 	int x = 0;
 	int y = 0;
 	int win = 0;
-	while (win<row*col- EAST_COUNT)
+	while (win < row * col - EASY_COUNT)
 	{
-		printf("输入坐标");
+		printf("请输入坐标");
 		scanf("%d %d", &x, &y);
 		if (x >= 1 && x <= row && y >= 1 && y <= col)
 		{
 			if (mine[x][y] == '1')
 			{
-				printf("很遗憾，游戏结束\n");
+				printf("游戏失败，你被炸死了\n");
 				displayboard(mine, ROW, COL);
 				break;
 			}
 			else
 			{
-				int count = getmine_count(mine, x, y);
-				show[x][y] = count + '0';
+				int count = getmine(mine, x, y);
+				show[x][y] = count + '0';//1加上字符0就为字符1，如果是2加上字符0就为字符2
 				displayboard(show, ROW, COL);
 				win++;
 			}
@@ -86,14 +85,9 @@ void findmine(char mine[ROWS][COLS],char show[ROWS][COLS], int row, int col)
 			printf("输入错误，请重新输入\n");
 		}
 	}
-	if (win == row * col - EAST_COUNT)
+	if (win == row * col - EASY_COUNT)
 	{
-		printf("排雷成功，你赢了\n");
+		printf("恭喜你，扫雷成功\n");
 		displayboard(mine, ROW, COL);
 	}
 }
-
-
-
-
-
