@@ -11,7 +11,7 @@ void SLTest01()
 	SLPushBack(&sl, 3);
 	SLPushBack(&sl, 4);
 	SLPrint(sl);//1 2 3 4
-
+	printf("\n");
 	/*SLBackAdd(&sl, 4, 5);
 	SLPrint(sl); */
 	SLDel(&sl,1);

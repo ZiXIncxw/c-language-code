@@ -2,49 +2,63 @@
 
 #include<iostream>
 using namespace std;
-class Date
-{
-public:
-	Date(int year = 1, int month = 1, int day = 1)
-	{
-		_year = year;
-		_month = month;
-		_day = day;
-	}
-
-	//  error C2652: “Date”: 非法的复制构造函数: 第一个参数不应是“Date”
-	// Date d2(d1)
-	//Date(const Date& d)
-	//{
-	//	_year = d._year;
-	//	_month = d._month;
-	//	_day = d._day;
-	//}
-
-	void Print()
-	{
-		cout << _year << "-" << _month << "-" << _day << endl;
-	}
-private:
-	int _year;
-	int _month;
-	int _day;
-};
-
-//void Func1(const Date& d)
-void Func1(Date d)
-{
-	cout << &d << endl;
-	d.Print();
-}
-
+//class Date
+//{
+//public:
+//	Date(int year = 1, int month = 1, int day = 1)
+//	{
+//		_year = year;
+//		_month = month;
+//		_day = day;
+//	}
+//
+//	  //error C2652: “Date”: 非法的复制构造函数: 第一个参数不应是“Date”
+//	 //Date d2(d1)
+//	Date(const Date& d)
+//	{
+//		_year = d._year;
+//		_month = d._month;
+//		_day = d._day;
+//	}
+//
+//	/*Date(const Date& d)
+//	{
+//		d._year = _year;
+//		d._month = _month;
+//		d._day = _day;
+//	}*/
+//
+//	/*Date(Date d)
+//	{
+//		_year = d._year;
+//		_month = d._month;
+//		_day = d._day;
+//	}*/
+//
+//	void Print()
+//	{
+//		cout << _year << "-" << _month << "-" << _day << endl;
+//	}
+//private:
+//	int _year;
+//	int _month;
+//	int _day;
+//};
+//
+////void Func1(const Date& d)
+//void Func1(Date d)
+//{
+//	cout << &d << endl;
+//	d.Print();
+//}
+//
 //int main()
 //{
 //	Date d1(2024, 7, 12);
 //	d1.Print();
 //
 //	// C++的规定，传值传参要调用拷贝构造
-//	Func1(d1);
+//	//Func1(d1);
 //
 //	//调用拷贝构造要调用传值传参，而c++规定传值传参要调用拷贝构造，由此形成了无限递归
 //	//而且需要注意的是最好加const，因为如果你不加const，那么你想要用d1拷贝d2，那么假如你在拷贝函数出现bug的话，d1的值就会被改变
@@ -58,87 +72,27 @@ void Func1(Date d)
 //}
 //
 typedef int STDataType;
-class Stack
-{
-public:
-	Stack(int n = 4)
-	{
-		_a = (STDataType*)malloc(sizeof(STDataType) * n);
-		if (nullptr == _a)
-		{
-			perror("malloc申请空间失败");
-			return;
-		}
-		_capacity = n;
-		_top = 0;
-	}
 
-	// st2(st1)
-	//Stack(const Stack& st)
-	//{
-	//	cout << "Stack(const Stack& st)" << endl;
-	//	// 需要对_a指向资源创建同样大的资源再拷贝值
-	//	_a = (STDataType*)malloc(sizeof(STDataType) * st._capacity);
-	//	if (nullptr == _a)
-	//	{
-	//		perror("malloc申请空间失败!!!");
-	//		return;
-	//	}
-	//	memcpy(_a, st._a, sizeof(STDataType) * st._top);
-	//	_top = st._top;
-	//	_capacity = st._capacity;
-	//}
 
-	void Push(STDataType x)
-	{
-		if (_top == _capacity)
-		{
-			int newcapacity = _capacity * 2;
-			STDataType* tmp = (STDataType*)realloc(_a, newcapacity *
-				sizeof(STDataType));
-			if (tmp == NULL)
-			{
-				perror("realloc fail");
-				return;
-			}
-			_a = tmp;
-			_capacity = newcapacity;
-		}
-		_a[_top++] = x;
-
-	}
-	~Stack()
-	{
-		cout << "~Stack()" << endl;
-		free(_a);
-		_a = nullptr;
-		_top = _capacity = 0;
-	}
-private:
-	STDataType* _a;
-	size_t _capacity;
-	size_t _top;
-};
-
-void Func(Stack st)
-{
-
-}
-
-int main()
-{
-	Stack st1;
-	st1.Push(1);
-	st1.Push(2);
-
-	Func(st1);
-
-	// Stack不显示实现拷贝构造，用自动生成的拷贝构造完成浅拷贝
-	// 会导致st1和st2里面的_a指针指向同一块资源，析构时会析构两次，程序崩溃
-	//Stack st2(st1);
-
-	return 0;
-}
+//void Func(Stack st)
+//{
+//
+//}
+//
+//int main()
+//{
+//	Stack st1;
+//	st1.Push(1);
+//	st1.Push(2);
+//
+//	Func(st1);
+//
+//	// Stack不显示实现拷贝构造，用自动生成的拷贝构造完成浅拷贝
+//	// 会导致st1和st2里面的_a指针指向同一块资源，析构时会析构两次，程序崩溃
+//	//Stack st2(st1);
+//
+//	return 0;
+//}
 
 //void func1(const Stack& st)
 //{
@@ -175,23 +129,87 @@ int main()
 //	return 0;
 //}
 
-//Stack& func2(Stack& st)
-//{
-//	st.Push(1);
-//	st.Push(1);
-//	st.Push(1);
-//
-//	return st;
-//}
-//
-//int main()
-//{
-//	//Stack ret = func2();
-//	Stack st1;
-//	func2(st1);
-//
-//	return 0;
-//}
+class Stack
+{
+public:
+	Stack(int n = 4)
+	{
+		_a = (STDataType*)malloc(sizeof(STDataType) * n);
+		if (nullptr == _a)
+		{
+			perror("malloc申请空间失败");
+			return;
+		}
+		_capacity = n;
+		_top = 0;
+	}
+
+	// st2(st1)
+	Stack(const Stack& st)
+	{
+		cout << "Stack(const Stack& st)" << endl;
+		// 需要对_a指向资源创建同样大的资源再拷贝值
+		_a = (STDataType*)malloc(sizeof(STDataType) * st._capacity);
+		if (nullptr == _a)
+		{
+			perror("malloc申请空间失败!!!");
+			return;
+		}
+		memcpy(_a, st._a, sizeof(STDataType) * st._top);
+		_top = st._top;
+		_capacity = st._capacity;
+	}
+
+	void Push(STDataType x)
+	{
+		if (_top == _capacity)
+		{
+			int newcapacity = _capacity * 2;
+			STDataType* tmp = (STDataType*)realloc(_a, newcapacity * sizeof(STDataType));
+			if (tmp == NULL)
+			{
+				perror("realloc fail");
+				return;
+			}
+			_a = tmp;
+			_capacity = newcapacity;
+		}
+		_a[_top++] = x;
+
+	}
+	~Stack()
+	{
+		cout << "~Stack()" << endl;
+		free(_a);
+		_a = nullptr;
+		_top = _capacity = 0;
+	}
+private:
+	STDataType* _a;
+	size_t _capacity;
+	size_t _top;
+};
+
+Stack func2()
+{
+	/*st.Push(1);
+	st.Push(1);
+	st.Push(1);*/
+
+	static Stack st;
+	//Stack st;
+
+	return st;
+}
+
+int main()
+{
+	//Stack ret = func2();
+	
+	func2();
+
+	return 0;
+}
 
 /////////////////////////////////////////////////////////////////////////////
 //class A

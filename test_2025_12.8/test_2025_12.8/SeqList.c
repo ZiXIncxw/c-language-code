@@ -34,7 +34,7 @@ void SLCheck(SL* ps)
 		if (tmp == NULL)
 		{
 			perror("realloc");
-			return 1;
+			exit(1);
 		}
 		ps->arr = tmp;
 		ps->capacity = Newcapacity;
@@ -52,7 +52,7 @@ void SLPushBack(SL* ps, SLDataType x)//Î²²å
 void SLPushFront(SL* ps, SLDataType x)//Í·²å
 {
 	assert(ps);
-	void SLCheck(ps);
+	SLCheck(ps);
 	for (int i = ps->size; i > 0; i--)
 	{
 		ps->arr[i] = ps->arr[i - 1];//arr[1]=arr[0];
