@@ -1,0 +1,46 @@
+# ===== Visual Studio / MSVC 编译产物 =====
+[Bb]in/
+[Oo]bj/
+Debug/
+Release/
+x64/
+ARM64/
+*.ipch
+*.pch
+*.pdb
+*.idb
+*.ilk
+*.exp
+*.iobj
+*.ipdb
+*.obj
+*.res
+*.exe
+*.dll
+*.lib
+*.recipe
+*.tlog
+*.log
+*.lastbuildstate
+
+# ===== Visual Studio IDE 状态文件 =====
+.vs/
+*.suo
+*.user
+*.rsuser
+*.VC.db
+*.VC.VC.opendb
+*.db
+*.db-wal
+*.db-shm
+*.vsidx
+*.sln.docstates
+*.aps
+*.ncb
+*.sdf
+*.opensdf
+*.cache
+
+# ===== 系统杂项 =====
+Thumbs.db
+desktop.ini
