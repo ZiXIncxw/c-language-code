@@ -2,45 +2,70 @@
 
 #include "string.h"
 
-int main()
+void TestStage2()
 {
-    Confidence::string s1;
-    Confidence::string s2("hello world");
-    cout << "s1=[" << s1.c_str() << "] s2=[" << s2.c_str() << "]" << endl;
+    Confidence::string s("hello");
+    s.push_back(' ');
+    s.append("world");
+    s += '!';
+    s += "!!!";
+    cout << "[" << s.c_str() << "] size=" << s.size() << endl;
+    // 期望：[hello world!!!!] size=16
 
-    // ---- 深拷贝的照妖镜：两个地址必须不同 ----
-    Confidence::string s3(s2);
-    cout << "s2 addr=" << (void*)s2.c_str()
-        << "  s3 addr=" << (void*)s3.c_str() << endl;   // 期望：两个地址不一样
+    s.insert(0, "say: ");
+    cout << "[" << s.c_str() << "] size=" << s.size() << endl;
+    // 期望：[say: hello world!!!!] size=21
 
-    // ---- 赋值 ----
-    Confidence::string s4;
-    s4 = s2;
-    cout << "s4=[" << s4.c_str() << "]" << endl;
+    s.insert(5, '$');
+    cout << "[" << s.c_str() << "] size=" << s.size() << endl;
+    // 期望：[say: $hello world!!!!] size=22
 
-    // ---- 自赋值：绝对不能崩 ----
-    s4 = s4;
-    cout << "after self-assign s4=[" << s4.c_str() << "]" << endl;
-
-    // ---- 链式赋值：验证返回的是引用 ----
-    Confidence::string s5, s6;
-    s5 = s6 = s2;
-    cout << "s5=[" << s5.c_str() << "] s6=[" << s6.c_str() << "]" << endl;
-
-    // ---- operator[] ----
-    for (size_t i = 0; i < s2.size(); i++) { s2[i] += 2; }
-    cout << s2.c_str() << endl;
-
-    // ---- 迭代器 / 范围 for ----
-    for (auto e : s2) { cout << e << " "; }
-    cout << endl;
-
-    Confidence::string::iterator it = s3.begin();
-    while (it != s3.end()) { cout << *it << " "; ++it; }
-    cout << endl;
-
-    return 0;   // 跑到这里、退出码 0、全程不弹崩溃框 = 通过
+    Confidence::string t("abc");
+    t.insert(t.size(), 'Z');       // 尾插
+    cout << "[" << t.c_str() << "]" << endl;   // [abcZ]
+    t.insert(0, ">>");
+    cout << "[" << t.c_str() << "]" << endl;   // [>>abcZ]
 }
+
+//int main()
+//{
+//    Confidence::string s1;
+//    Confidence::string s2("hello world");
+//    cout << "s1=[" << s1.c_str() << "] s2=[" << s2.c_str() << "]" << endl;
+//
+//    // ---- 深拷贝的照妖镜：两个地址必须不同 ----
+//    Confidence::string s3(s2);
+//    cout << "s2 addr=" << (void*)s2.c_str()
+//        << "  s3 addr=" << (void*)s3.c_str() << endl;   // 期望：两个地址不一样
+//
+//    // ---- 赋值 ----
+//    Confidence::string s4;
+//    s4 = s2;
+//    cout << "s4=[" << s4.c_str() << "]" << endl;
+//
+//    // ---- 自赋值：绝对不能崩 ----
+//    s4 = s4;
+//    cout << "after self-assign s4=[" << s4.c_str() << "]" << endl;
+//
+//    // ---- 链式赋值：验证返回的是引用 ----
+//    Confidence::string s5, s6;
+//    s5 = s6 = s2;
+//    cout << "s5=[" << s5.c_str() << "] s6=[" << s6.c_str() << "]" << endl;
+//
+//    // ---- operator[] ----
+//    for (size_t i = 0; i < s2.size(); i++) { s2[i] += 2; }
+//    cout << s2.c_str() << endl;
+//
+//    // ---- 迭代器 / 范围 for ----
+//    for (auto e : s2) { cout << e << " "; }
+//    cout << endl;
+//
+//    Confidence::string::iterator it = s3.begin();
+//    while (it != s3.end()) { cout << *it << " "; ++it; }
+//    cout << endl;
+//
+//    return 0;   // 跑到这里、退出码 0、全程不弹崩溃框 = 通过
+//}
 
 //int main()
 //{
@@ -63,3 +88,9 @@ int main()
 //	}
 //	return 0;
 //}
+
+int main()
+{
+    TestStage2();
+    return 0;
+}

@@ -103,13 +103,40 @@ namespace Confidence
 			return _str + _size;
 		}
 
+		void reserve(size_t n);
+		void push_back(char ch);
+		void append(const char* s);
+		string& operator+=(char ch);
+		string& operator+=(const char* str);
+
+		void insert(size_t pos, char ch);
+		void insert(size_t pos, const char* str);
+
+		static const size_t npos;              
+
+		void erase(size_t pos, size_t len = npos);
+
+		size_t find(char ch, size_t pos = 0);
+		size_t find(const char* str, size_t pos = 0);
+
+		string substr(size_t pos = 0, size_t len = npos);
+
+
 	private:
 		char* _str;
 		size_t _size;
 		size_t _capacity;
 	};
 
+	bool operator<(const string& s1, const string& s2);
+	bool operator<=(const string& s1, const string& s2);
+	bool operator>(const string& s1, const string& s2);
+	bool operator>=(const string& s1, const string& s2);
+	bool operator==(const string& s1, const string& s2);
+	bool operator!=(const string& s1, const string& s2);
 
+	ostream& operator<<(ostream& out, const string& s);
+	istream& operator>>(istream& in, string& s);
 
 }
 
