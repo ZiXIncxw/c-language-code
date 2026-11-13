@@ -44,3 +44,17 @@ ARM64/
 # ===== 系统杂项 =====
 Thumbs.db
 desktop.ini
+
+# ===== 其他编辑器 / 竞赛环境 =====
+# 注意：故意不忽略 *.txt / *.in / *.out —— 题目样例与笔记可能就存成这些
+.vscode/
+.idea/
+*.code-workspace
+.cproject
+.project
+*.o
+*.gch
+*.depend
+*.layout
+*.stackdump
+a.out
